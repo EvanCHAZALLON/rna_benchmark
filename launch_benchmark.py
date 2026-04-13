@@ -1,8 +1,7 @@
 import json
 import os
 
-#
-FILENAME = 'split.json'
+FILENAME = 'benchmark/split.json'
 COLLECTION = 'test_set'
 
 NATIVE_ELEMENTS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'orphans', 'native')
