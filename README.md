@@ -3,4 +3,4 @@
 
 Initial pipeline 
 
-![Initial pipeline](https://imgur.com/a/lCRUU04)
+![Initial pipeline](https://image.noelshack.com/fichiers/2026/16/1/1776070549-first-pipeline.png)
