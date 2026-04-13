@@ -12,7 +12,7 @@ Workflow for incorporating the benchmark of the trRosettaRNA2 model, to an exist
 2. [Pipeline](#pipeline)
     1. [🧬 RNA 3D Structure Prediction Pipeline](#prediction-pipeline)
     2. [📈 Benchmarking Pipeline](#benchmarking-pipeline)
-3. [References](#references)
+3. [Useful links](#useful-links)
 
 ---
 
@@ -99,7 +99,10 @@ Post-prediction workflow for metric computation and data visualization
 </div>
 
 
-## References <a name="references"></a>
+## Useful links <a name="useful-links"></a>
+
+- [YangLab-SDU/trRosettaRNA2](https://github.com/YangLab-SDU/trRosettaRNA2)
+- [EvryRNA/rnadvisor](https://github.com/EvryRNA/rnadvisor)
 
 
 
