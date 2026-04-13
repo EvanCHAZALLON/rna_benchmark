@@ -1,6 +1,7 @@
 import json
 import os
 
+#
 FILENAME = 'split.json'
 COLLECTION = 'test_set'
 
