@@ -1,7 +1,11 @@
 # 📊 RNABenchmark 
 by Evan CHAZALLON @ IBISC Laboratory
 
+---
+
 Workflow for incorporating the benchmark of the trRosettaRNA2 model, to an existing one.
+
+---
 
 **Table of contents** 
 1. [Installation](#installation)
@@ -9,6 +13,8 @@ Workflow for incorporating the benchmark of the trRosettaRNA2 model, to an exist
     1. [🧬 RNA 3D Structure Prediction Pipeline](#prediction-pipeline)
     2. [📈 Benchmarking Pipeline](#benchmarking-pipeline)
 3. [References](#references)
+
+---
 
 ## Installation <a name="installation"></a>
 
