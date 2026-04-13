@@ -32,6 +32,7 @@ Staying in the same folder, let's install the benchmark tool
 4. Downloading benchmarking tool
 ```bash
 git clone https://github.com/EvanCHAZALLON/rna_benchmark.git
+mv rna_benchmark/* .
 ```
 
 5. Install the relevant dependencies for the benchmarking tool
