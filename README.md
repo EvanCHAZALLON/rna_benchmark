@@ -39,6 +39,7 @@ mv rna_benchmark/* .
 ```bash
 pip install -r requirements.txt
 ```
+⚠️ Note: This benchmarking tool is using RNAdvisor, which is a docker-based library. Therefore, you'll need it installed on your machine for the benchmark to work. 
 
 
 6. Run the benchmark
