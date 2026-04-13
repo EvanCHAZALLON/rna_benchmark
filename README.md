@@ -3,10 +3,49 @@ by Evan CHAZALLON @ IBISC Laboratory
 
 Workflow for incorporating the benchmark of the trRosettaRNA2 model, to an existing one.
 
+## Installation
+
+1. Install trRosettaRNA2 model
+
+```bash
+git clone https://github.com/YangLab-SDU/trRosettaRNA2.git
+cd trRosettaRNA2
+```
+
+2. Install trRosettaRNA2 environment
+```bash
+mamba env create -f environment.yml
+mamba activate trRNA2
+```
+
+3. Download the network weights
+```bash
+wget http://yanglab.qd.sdu.edu.cn/trRosettaRNA/download/params_trRNA2.tar.bz2
+# If you encounter timeout or connection errors, try downloading from our Hugging Face mirror instead:
+# wget https://huggingface.co/datasets/quailwwk/trRNA2/resolve/main/params_trRNA2.tar.bz2
+
+tar -jxvf params_trRNA2.tar.bz2
+```
+
+Staying in the same folder, let's install the benchmark tool 
+
+4. Downloading benchmarking tool
+```bash
+git clone https://github.com/EvanCHAZALLON/rna_benchmark.git
+```
+
+5. Running the benchmark
+```bash
+python launch_benchmark.py
+```
 
 
 
-## 🧬 RNA 3D Structure Prediction Pipeline
+
+## Pipeline
+
+
+### 🧬 RNA 3D Structure Prediction Pipeline
 
 - **Data Prep**: Extracting sequences that are already in the initial benchmark via RNA3DB and converting raw textual sequences into FASTA format (because trRosettaRNA2 does not handle textual sequences as input).
 
@@ -19,7 +58,7 @@ Workflow for incorporating the benchmark of the trRosettaRNA2 model, to an exist
 ![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/1/1776070549-first-pipeline.png)
 
 
-## 📈 Benchmarking Pipeline
+### 📈 Benchmarking Pipeline
 
 Post-prediction workflow for metric computation and data visualization 
 
