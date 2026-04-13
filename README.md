@@ -34,7 +34,13 @@ Staying in the same folder, let's install the benchmark tool
 git clone https://github.com/EvanCHAZALLON/rna_benchmark.git
 ```
 
-5. Running the benchmark
+5. Install the relevant dependencies for the benchmarking tool
+```bash
+pip install -r requirements.txt
+```
+
+
+6. Run the benchmark
 ```bash
 python launch_benchmark.py
 ```
