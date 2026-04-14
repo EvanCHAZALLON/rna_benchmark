@@ -7,6 +7,9 @@ import pandas as pd
 import json
 import shutil
 
+# Signal treatment
+import statsmodels.api as sm
+
 # Data viz
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -25,6 +28,8 @@ NATIVE_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'orphans', 'native')
 ROSETTA_METRICS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'metrics_trRosettaRNA2')
 CLEMENT_METRICS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'metrics_benchmark_clement')
 MERGED_METRICS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'metrics_merged')
+FIGURES_BASE_DIR = os.path.join(os.getcwd(), 'figures')
+DATA_OUTPUT_BASE_DIR = os.path.join(os.getcwd(), 'data_output')
 
 # Metrics definition
 BENCHMARKED_METRICS = ['GDT-TS', 'P-VALUE', 'INF-ALL', 'MCQ', 'TM-score', 'lDDT', 'RMSD', 'BARNABA-eRMSD']
@@ -56,6 +61,8 @@ def normalize_metric(data, metric):
 
 # Creates subdirectories for all .pdb predictions files for RNAdvisor to work properly [otherwise compares native file with all files of the same directory as the prediction]
 def create_all_sub_directories():
+    if not os.path.isdir(DATA_OUTPUT_BASE_DIR): os.mkdir(DATA_OUTPUT_BASE_DIR)
+
     for file in os.listdir(OUTPUT_BASE_DIR):
         if file.endswith('.pdb'):
             if not os.path.isdir(os.path.join(OUTPUT_BASE_DIR, file.split('.pdb')[0])):
@@ -200,7 +207,7 @@ def analyze_and_export_metrics():
         scores[model]['length'] = length_list
 
     metrics_df = pd.DataFrame(scores)
-    metrics_df.to_csv('all_metrics_all_models.csv') # Exporting raw metrics data, not normalized and not averaged
+    metrics_df.to_csv(f'{DATA_OUTPUT_BASE_DIR}/all_metrics_all_models.csv') # Exporting raw metrics data, not normalized and not averaged
 
     normalized_averaged_metrics = {model: {metric: 0.0 for metric in BENCHMARKED_METRICS} for model in BENCHMARKED_MODELS}
 
@@ -212,7 +219,7 @@ def analyze_and_export_metrics():
 
 
     normalized_averaged_metrics_df = pd.DataFrame(normalized_averaged_metrics)
-    normalized_averaged_metrics_df.to_csv('all_metrics_all_models_normalized.csv')
+    normalized_averaged_metrics_df.to_csv(f'{DATA_OUTPUT_BASE_DIR}/all_metrics_all_models_normalized.csv')
 
     return metrics_df, normalized_averaged_metrics_df
 
@@ -224,6 +231,8 @@ Plotting functions
 
 # Plotting function: cumulative barplot benchmark
 def plot_benchmark(normalized_averaged_metrics_df: pd.DataFrame):
+    if not os.path.isdir(FIGURES_BASE_DIR): os.mkdir(FIGURES_BASE_DIR)
+
     normalized_averaged_metrics_df['total'] = normalized_averaged_metrics_df.sum(axis=1)
     f_df_sorted = normalized_averaged_metrics_df.sort_values('total', ascending=True).drop(columns=['total'])
 
@@ -251,8 +260,35 @@ def plot_benchmark(normalized_averaged_metrics_df: pd.DataFrame):
     ax.set_xlim([0.0, len(BENCHMARKED_METRICS)])
     plt.tight_layout()
 
-    plt.savefig('benchmark_rna3db.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.savefig(f'{FIGURES_BASE_DIR}/BENCHMARK_RNA3DB.png', dpi=300, bbox_inches='tight', facecolor='white')
     plt.show()
+
+
+def plot_length_benchmarks(metrics_df: pd.DataFrame):
+    length_array = metrics_df['length'].iloc[0]
+
+    for metric in metrics_df:
+        if metric != 'length':
+            fig, ax = plt.subplots(figsize=(8, 5))
+
+            ax.set_ylabel(f'Metric: {metric}')
+            ax.set_xlabel('Sequence length')
+            ax.set_title('Metric performance v.s. sequence length')
+
+            for model, data in metrics_df[metric].items():
+                data = pd.DataFrame({'length': length_array, 'data': data})  # Otherwise JSON can't load nan values
+                data = data[data['data'] != np.nan]
+                data = data.groupby(by='length', as_index=False).mean()
+
+                x = np.array(data['length'])
+                y = np.array(data['data'])
+
+                lowess = sm.nonparametric.lowess
+                z = lowess(y, x, frac=0.15)
+
+                sns.lineplot(x=z[:, 0], y=z[:, 1], label=model, ax=ax, linewidth=2.5)
+
+            plt.savefig(f"{FIGURES_BASE_DIR}/{metric}_vs_length.png", dpi=300, bbox_inches='tight')
 
 
 
@@ -277,3 +313,4 @@ metrics_df, normalized_averaged_metrics_df = analyze_and_export_metrics()
 
 # Plotting the final benchmark
 plot_benchmark(normalized_averaged_metrics_df.T)
+plot_length_benchmarks(metrics_df.T)
