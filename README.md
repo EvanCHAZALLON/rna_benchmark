@@ -52,7 +52,7 @@ mv rna_benchmark/* .
 ```bash
 pip install -r requirements.txt
 ```
-⚠️ Note: This benchmarking tool is using RNAdvisor, which is a docker-based library. Therefore, you'll need it installed on your machine for the benchmark to work. 
+⚠️ Note: This benchmarking tool is using RNAdvisor, which is a **docker-based** library. Therefore, you'll need it installed on your machine for the benchmark to work. 
 
 
 6. Run the benchmark
@@ -76,7 +76,7 @@ python launch_benchmark.py
 
   &rarr; Results: Final output of .pdb files for structural analysis.
 
-![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/1/1776070549-first-pipeline.png)
+![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/2/1776170492-screenshot-2026-04-14-at-2-41-09-pm.png)
 
 
 ### 📈 Benchmarking Pipeline <a name="benchmarking-pipeline"></a>
@@ -103,6 +103,8 @@ Post-prediction workflow for metric computation and data visualization
 
 - [YangLab-SDU/trRosettaRNA2](https://github.com/YangLab-SDU/trRosettaRNA2)
 - [EvryRNA/rnadvisor](https://github.com/EvryRNA/rnadvisor)
+
+- [Docker installation guide](https://docs.docker.com/engine/install/)
 
 
 
