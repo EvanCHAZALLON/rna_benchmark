@@ -264,7 +264,9 @@ def plot_benchmark(normalized_averaged_metrics_df: pd.DataFrame):
     plt.show()
 
 
+# Plotting of models performance for each metric versus sequence length
 def plot_length_benchmarks(metrics_df: pd.DataFrame):
+    # Taking the length array which is at first always the same (contains ordered sequence lengths for all our data)
     length_array = metrics_df['length'].iloc[0]
 
     for metric in metrics_df:
@@ -275,14 +277,17 @@ def plot_length_benchmarks(metrics_df: pd.DataFrame):
             ax.set_xlabel('Sequence length')
             ax.set_title('Metric performance v.s. sequence length')
 
+            # Taking metric data for each model, for the current metric
             for model, data in metrics_df[metric].items():
-                data = pd.DataFrame({'length': length_array, 'data': data})  # Otherwise JSON can't load nan values
-                data = data[data['data'] != np.nan]
-                data = data.groupby(by='length', as_index=False).mean()
+                # Loading metric data into a single DataFrame
+                data = pd.DataFrame({'length': length_array, 'data': data})
+                data = data[data['data'] != np.nan] # Deleting nan values
+                data = data.groupby(by='length', as_index=False).mean() # Averaging metrics for sequences that have the same length
 
                 x = np.array(data['length'])
                 y = np.array(data['data'])
 
+                # Smoothing out the curves
                 lowess = sm.nonparametric.lowess
                 z = lowess(y, x, frac=0.15)
 
