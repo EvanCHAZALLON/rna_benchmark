@@ -86,6 +86,11 @@ Program begins here
 with open(DATASET_FILE, 'r') as file:
   data = json.load(file)
 
+
+# Launching the creation of directories
+setup_directories()
+
+# Converting to fasta the relevant files through the test_set and train_set (following the selction of the original dataset)
 converts_to_fasta(data, 'test_set')
 converts_to_fasta(data, 'train_set')
 
