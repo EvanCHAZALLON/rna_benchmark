@@ -28,8 +28,6 @@ NATIVE_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'orphans', 'native')
 ROSETTA_METRICS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'metrics_trRosettaRNA2')
 CLEMENT_METRICS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'metrics_benchmark_clement')
 MERGED_METRICS_BASE_DIR = os.path.join(os.getcwd(), 'benchmark', 'metrics_merged')
-FIGURES_BASE_DIR = os.path.join(os.getcwd(), 'figures')
-DATA_OUTPUT_BASE_DIR = os.path.join(os.getcwd(), 'data_output')
 
 # Metrics definition
 BENCHMARKED_METRICS = ['GDT-TS', 'P-VALUE', 'INF-ALL', 'MCQ', 'TM-score', 'lDDT', 'RMSD', 'BARNABA-eRMSD']
@@ -61,8 +59,6 @@ def normalize_metric(data, metric):
 
 # Creates subdirectories for all .pdb predictions files for RNAdvisor to work properly [otherwise compares native file with all files of the same directory as the prediction]
 def create_all_sub_directories():
-    if not os.path.isdir(DATA_OUTPUT_BASE_DIR): os.mkdir(DATA_OUTPUT_BASE_DIR)
-
     for file in os.listdir(OUTPUT_BASE_DIR):
         if file.endswith('.pdb'):
             if not os.path.isdir(os.path.join(OUTPUT_BASE_DIR, file.split('.pdb')[0])):
@@ -231,8 +227,6 @@ Plotting functions
 
 # Plotting function: cumulative barplot benchmark
 def plot_benchmark(normalized_averaged_metrics_df: pd.DataFrame):
-    if not os.path.isdir(FIGURES_BASE_DIR): os.mkdir(FIGURES_BASE_DIR)
-
     normalized_averaged_metrics_df['total'] = normalized_averaged_metrics_df.sum(axis=1)
     f_df_sorted = normalized_averaged_metrics_df.sort_values('total', ascending=True).drop(columns=['total'])
 
