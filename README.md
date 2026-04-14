@@ -1,9 +1,22 @@
 # 📊 RNABenchmark 
 by Evan CHAZALLON @ IBISC Laboratory
 
+---
+
 Workflow for incorporating the benchmark of the trRosettaRNA2 model, to an existing one.
 
-## Installation
+---
+
+**Table of contents** 
+1. [Installation](#installation)
+2. [Pipeline](#pipeline)
+    1. [🧬 RNA 3D Structure Prediction Pipeline](#prediction-pipeline)
+    2. [📈 Benchmarking Pipeline](#benchmarking-pipeline)
+3. [Useful links](#useful-links)
+
+---
+
+## Installation <a name="installation"></a>
 
 1. Install trRosettaRNA2 model
 
@@ -39,6 +52,7 @@ mv rna_benchmark/* .
 ```bash
 pip install -r requirements.txt
 ```
+⚠️ Note: This benchmarking tool is using RNAdvisor, which is a docker-based library. Therefore, you'll need it installed on your machine for the benchmark to work. 
 
 
 6. Run the benchmark
@@ -49,10 +63,10 @@ python launch_benchmark.py
 
 
 
-## Pipeline
+## Pipeline <a name="pipeline"></a>
 
 
-### 🧬 RNA 3D Structure Prediction Pipeline
+### 🧬 RNA 3D Structure Prediction Pipeline <a name="prediction-pipeline"></a>
 
 - **Data Prep**: Extracting sequences that are already in the initial benchmark via RNA3DB and converting raw textual sequences into FASTA format (because trRosettaRNA2 does not handle textual sequences as input).
 
@@ -65,7 +79,7 @@ python launch_benchmark.py
 ![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/1/1776070549-first-pipeline.png)
 
 
-### 📈 Benchmarking Pipeline
+### 📈 Benchmarking Pipeline <a name="benchmarking-pipeline"></a>
 
 Post-prediction workflow for metric computation and data visualization 
 
@@ -83,5 +97,12 @@ Post-prediction workflow for metric computation and data visualization
 <div align="center">
 <img src="https://image.noelshack.com/fichiers/2026/16/1/1776082035-plot-pipeline.png" alt="Final pipeline" width="600"/>
 </div>
+
+
+## Useful links <a name="useful-links"></a>
+
+- [YangLab-SDU/trRosettaRNA2](https://github.com/YangLab-SDU/trRosettaRNA2)
+- [EvryRNA/rnadvisor](https://github.com/EvryRNA/rnadvisor)
+
 
 
