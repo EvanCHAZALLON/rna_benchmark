@@ -76,7 +76,7 @@ python launch_benchmark.py
 
   &rarr; Results: Final output of .pdb files for structural analysis.
 
-![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/2/1776170492-screenshot-2026-04-14-at-2-41-09-pm.png)
+![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/2/1776170933-screenshot-2026-04-14-at-2-48-37-pm.png)
 
 
 ### 📈 Benchmarking Pipeline <a name="benchmarking-pipeline"></a>
@@ -91,7 +91,7 @@ Post-prediction workflow for metric computation and data visualization
 
 - **Final Plotting**: Generation of cumulative metric bar plots and individual performance analysis vs. sequence length.
 
-![Prediction pipeline](https://image.noelshack.com/fichiers/2026/16/1/1776082032-merging-pipeline.png)
+![Benchmarking pipeline](https://image.noelshack.com/fichiers/2026/16/2/1776171010-screenshot-2026-04-14-at-2-49-44-pm.png)
 
 
 <div align="center">
